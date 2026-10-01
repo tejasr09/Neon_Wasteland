@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b16">
+  <title>NEON WASTELAND // Open World</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell" aria-label="Neon Wasteland game">
+    <canvas id="game" aria-label="2D side-scrolling open-world action game"></canvas>
+    <div class="kill-flash" id="killFlash"></div>
+    <header class="topbar">
+      <div class="brand">N//WASTELAND<small>OUTSKIRTS &middot; SECTOR 09</small></div>
+      <div class="hud-right"><div class="hud-chip" id="killCount">HOSTILES 00</div><div class="hud-chip" id="worldLabel">NIGHT CITY // 23:47</div><button class="icon-button" id="upgradeButton" aria-label="Open upgrades">&#10023; UPGRADES</button><button class="icon-button" id="settingsButton" aria-label="Open settings">&#9881; SETTINGS</button></div>
+    </header>
+    <div class="toast" id="toast"></div>
+    <footer class="bottom-hud">
+      <div class="status-box">
+        <div class="stat-label"><span>VITALS</span><span id="healthText">100 / 100</span></div>
+        <div class="bar"><span class="health-fill" id="healthBar" style="width:100%"></span></div>
+        <div class="stat-label"><span>CYBER-ENERGY</span><span id="energyText">100%</span></div>
+        <div class="bar"><span class="energy-fill" id="energyBar" style="width:100%"></span></div>
+        <div class="status-meta"><span id="xpText">XP 0</span><span id="levelText">LV 1</span></div>
+        <div class="xp-track"><span id="xpBar" style="width:0%"></span></div>
+      </div>
+      <div class="controls-hint"><b id="hintMove">A / D</b> MOVE&nbsp; &middot; &nbsp;<b id="hintShoot">CLICK</b> FIRE&nbsp; &middot; &nbsp;<b id="hintAbility">Q</b> CYBERPULSE</div>
+    </footer>
+    <div class="weapon-hud" id="weaponHud">SIDEARM &middot; 12 / 12 &middot; 1/2/3 CLASS</div>
+    <section class="overlay" id="startOverlay">
+      <div class="panel">
+        <div class="eyebrow">A NEON-SOAKED FRONTIER</div>
+        <h1>NEON<br><span>WASTELAND</span></h1>
+        <p class="intro">The megacorp owns the skyline. The outlands belong to whoever can survive the night. Lock, load, and make your own legend.</p>
+        <div class="mission-line">[ SURVIVE THE BADLANDS &middot; TAKE NO ORDERS ]</div>
+        <button class="primary" id="startButton">ENTER THE WASTELAND&nbsp; &rarr;</button>
+        <button class="secondary" id="startSettings" style="margin-left:8px">SETTINGS</button>
+      </div>
+    </section>
+    <section class="overlay hidden" id="pauseOverlay">
+      <div class="panel">
+        <div class="eyebrow">SIGNAL INTERRUPTED</div><h2>PAUSED</h2>
+        <p class="intro">Catch your breath, runner. The wasteland isn't going anywhere.</p>
+        <div class="panel-actions"><button class="primary" id="resumeButton">BACK TO THE FIGHT</button><button class="secondary" id="pauseUpgrades">UPGRADES</button><button class="secondary" id="pauseSettings">SETTINGS</button></div>
+      </div>
+    </section>
+    <section class="overlay hidden" id="upgradeOverlay">
+      <div class="panel upgrade-panel">
+        <div class="eyebrow">RUNNER AUGMENTATION // SPEND EXPERIENCE</div><h2>UPGRADES <span id="upgradeXp" style="color:#52f6ef">0 XP</span></h2>
+        <p class="intro" style="margin-bottom:8px">Earn XP from kills and combat pickups. Upgrades persist when you respawn at a save point.</p>
+        <div class="upgrade-grid" id="upgradeGrid"></div>
+        <div class="panel-actions"><button class="primary" id="closeUpgrades">RETURN TO RUN</button></div>
+      </div>
+    </section>
+    <section class="overlay hidden" id="settingsOverlay">
+      <div class="panel settings-panel">
+        <div class="eyebrow">TUNE YOUR HARDWARE</div><h2>SETTINGS</h2>
+        <div class="settings-grid">
+          <label class="setting">DIFFICULTY
+            <select id="difficulty"><option value="street">Street samurai</option><option value="merc">Solo mercenary</option><option value="legend">Night City legend</option></select>
+          </label>
+          <label class="setting">MASTER VOLUME <output id="volumeValue">35%</output>
+            <input id="volume" type="range" min="0" max="100" value="35">
+          </label>
+          <label class="setting">WORLD GLOW <output id="glowValue">75%</output>
+            <input id="glow" type="range" min="25" max="100" value="75">
+          </label>
+          <label class="setting">AIM ASSIST
+            <select id="aimAssist"><option value="on">Smart targeting &middot; On</option><option value="off">Manual aim &middot; Off</option></select>
+          </label>
+          <div class="setting" style="grid-column:1/-1">KEYBINDS <output>SELECT A BINDING, THEN PRESS A KEY</output></div>
+          <div class="keybinds" id="keybinds"></div>
+        </div>
+        <div class="panel-actions"><button class="primary" id="closeSettings">SAVE &amp; RETURN</button><button class="secondary" id="resetSettings">RESET DEFAULTS</button></div>
+      </div>
+    </section>
+    <section class="overlay hidden" id="deadOverlay">
+      <div class="panel">
+        <div class="eyebrow">CONNECTION LOST</div><h2>FLATLINED</h2>
+        <p class="intro">You dropped <span id="finalKills">0</span> hostiles. In Night City, there's always another gig.</p>
+        <button class="primary" id="retryButton">RESPAWN AT SAVE POINT&nbsp; &#8635;</button>
+      </div>
+    </section>
+  </main>
+  <script src="game.js" defer></script>
+</body>
+</html>
